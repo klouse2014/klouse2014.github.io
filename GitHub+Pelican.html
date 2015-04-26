@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="klouse1988" />
+        <meta name="copyright" content="klouse1988" />
+
+<meta name="keywords" content="github, pelican, Pelican, " />
+        <title>使用GitHub＋Pelican搭建个人博客  · lovelySybil
+</title>
+        <link href="http://cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://klouse2014.github.io/theme/css/style.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://klouse2014.github.io/theme/css/solarizedlight.css" media="screen">
+        <link rel="shortcut icon" href="http://klouse2014.github.io/theme/images/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="http://klouse2014.github.io/theme/images/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://klouse2014.github.io/theme/images/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://klouse2014.github.io/theme/images/apple-touch-icon-72x72.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://klouse2014.github.io/theme/images/apple-touch-icon-114x114.png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://klouse2014.github.io/theme/images/apple-touch-icon-144x144.png" />
+        <link rel="icon" href="http://klouse2014.github.io/theme/images/apple-touch-icon-144x144.png" />
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://klouse2014.github.io/"><span class=site-name>lovelySybil</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://klouse2014.github.io">Home</a></li>
+                            <li ><a href="http://klouse2014.github.io/categories.html">Categories</a></li>
+                            <li ><a href="http://klouse2014.github.io/tags.html">Tags</a></li>
+                            <li ><a href="http://klouse2014.github.io/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://klouse2014.github.io/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page_header span10 offset2">
+    <h1><a href="http://klouse2014.github.io/GitHub+Pelican"> 使用GitHub＋Pelican搭建个人博客  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            <h2 id="github">github准备<a class="headerlink" href="#github" title="Permanent link">&para;</a></h2>
+<ul>
+<li>创建username.github.io&nbsp;数据仓库</li>
+</ul>
+<h2 id="pelican">pelican准备<a class="headerlink" href="#pelican" title="Permanent link">&para;</a></h2>
+<ul>
+<li>新建blog文件件,&nbsp;执行pelican-quickstart命令创建基本框架</li>
+<li>将output文件夹绑定到数据仓库</li>
+</ul>
+<div class="highlight"><pre><span class="nb">cd </span>output
+git init
+git remote add origin https://github.com/username/username.github.io.git
+git pull origin master
+</pre></div>
+
+
+<ul>
+<li>pelican 包含很多主题和插件，可以直接clone使用<ul>
+<li><a href="https://github.com/getpelican/pelican-themes.git">pelican-themes</a></li>
+<li><a href="https://github.com/getpelican/pelican-plugins.git">pelican-plugins</a></li>
+</ul>
+</li>
+<li>
+<p>使用<em>elegant</em>主题</p>
+<ul>
+<li><a href="http://oncrashreboot.com/elegant-best-pelican-theme-features#articles-count-with-every-tag-and-category">elegant主题说明文档</a></li>
+<li></li>
+</ul>
+</li>
+<li>
+<p>生成网页文件以及在本机上测试</p>
+</li>
+</ul>
+<div class="highlight"><pre>make html
+make serve
+</pre></div>
+
+
+<p>可以使用浏览器打开:http://localhost:8000来访问这个测试服务器, 然后就可以欣赏到你的博客了
+* 增加评论功能
+Pelican 使用Disqus评论, 可以申请在Disqus上申请一个站点, 然后在pelicanconf.py里添加或修改DISQUS_SITENAME项:
+<code>DISQUS_SITENAME = u"xxxxx"</code></p>
+<h2 id="_1">参考资料<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://github.com/getpelican/pelican/tree/3.5.0/docs">pelican官方说明文档</a></li>
+<li><a href="http://www.cnblogs.com/ballwql/p/pelican.html">配置文件参考</a></li>
+</ul>
+<section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://klouse2014.github.io/GitHub+Pelican#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'klouse2014';
+        var disqus_identifier = 'http://klouse2014.github.io/GitHub+Pelican';
+    var disqus_url = 'http://klouse2014.github.io/GitHub+Pelican';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+            <aside>
+            <hr/>
+            <nav>
+            <ul class="articles_timeline">
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+ 
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2015-04-26T21:33:00+08:00"> 4 26, 2015</time>
+            <h4>Category</h4>
+            <a class="category-link" href="/categories.html#Pelican-ref">Pelican</a> 
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article"> 
+                <li><a href="/tags.html#github-ref">github
+                    <span>1</span>
+</a></li>
+                <li><a href="/tags.html#pelican-ref">pelican
+                    <span>1</span>
+</a></li>
+            </ul>
+
+            <!-- Begin MailChimp Signup Form -->
+            <div id="mc_embed_signup">
+                <form action="klouse@126.com" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                    <h4>Email Newsletter</h4>
+                    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+                    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+                </form>
+            </div>
+
+            <!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+<script type="text/javascript">
+    var disqus_shortname = 'klouse2014';
+
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+        <script  language="javascript" type="text/javascript">
+            function uncollapse() {
+                var hash_str = window.location.hash;
+                if (window.location.hash.match(/^#comment-\d+$/))
+                {
+                    var hash_str = '#disqus_thread';
+                }
+                $(hash_str).collapse({
+                    toggle: true
+                    })
+            }
+        </script>
+
+        <script type="text/javascript" language="JavaScript">
+            uncollapse(); 
+        </script>
+    </body>
+</html>
