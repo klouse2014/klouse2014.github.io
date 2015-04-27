@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="klouse1988" />
+        <meta name="copyright" content="klouse1988" />
+
+<meta name="keywords" content=", Linux, " />
+        <title>shell命令备忘  · Winter Is Coming
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://klouse2014.github.io/theme/css/style.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://klouse2014.github.io/theme/css/solarizedlight.css" media="screen">
+        <link rel="shortcut icon" href="http://klouse2014.github.io/theme/images/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="http://klouse2014.github.io/theme/images/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://klouse2014.github.io/theme/images/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://klouse2014.github.io/theme/images/apple-touch-icon-72x72.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://klouse2014.github.io/theme/images/apple-touch-icon-114x114.png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://klouse2014.github.io/theme/images/apple-touch-icon-144x144.png" />
+        <link rel="icon" href="http://klouse2014.github.io/theme/images/apple-touch-icon-144x144.png" />
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://klouse2014.github.io/"><span class=site-name>Winter Is Coming</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://klouse2014.github.io">Home</a></li>
+                            <li ><a href="http://klouse2014.github.io/categories.html">Categories</a></li>
+                            <li ><a href="http://klouse2014.github.io/tags.html">Tags</a></li>
+                            <li ><a href="http://klouse2014.github.io/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://klouse2014.github.io/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page_header span10 offset2">
+    <h1><a href="http://klouse2014.github.io/shell+command"> shell命令备忘  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contents</h4>
+        <div class="toc">
+<ul>
+<li><a href="#_1">常用命令</a><ul>
+<li><a href="#find">find</a></li>
+<li><a href="#grep">grep</a></li>
+<li><a href="#test">test</a></li>
+<li><a href="#cut">cut</a></li>
+<li><a href="#mkdir">mkdir</a></li>
+<li><a href="#comm">comm</a></li>
+<li><a href="#expr">expr 或 $((…))</a></li>
+<li><a href="#9696">`…` 或 $(…)</a></li>
+<li><a href="#_2">${…}</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+
+            <p>发现很多shell命令看完之后不用渐渐就忘了, 因此把常用的命令总结一下后面有遇到的再更新。</p>
+
+<h1 id="_1">常用命令<a class="headerlink" href="#_1" title="Permanent link">¶</a></h1>
+<h2 id="find">find<a class="headerlink" href="#find" title="Permanent link">¶</a></h2>
+<p><code>find [path] [options] [tests] [actions]</code> </p>
+<ul>
+<li>path为绝对路径或相对路径</li>
+<li>option选项<ul>
+<li>-maxdepths N 最多搜索N层目录</li>
+</ul>
+</li>
+<li>tests提供多种测试, 按顺序应用到搜索上, false跳过, true对当前文件采取actions<ul>
+<li>-name pattern 文件名模式匹配</li>
+<li>-newer file1 ! file2 比指定file1新, file2旧的文件</li>
+<li>-type d/f 为目录/文件</li>
+<li>-mtime +n/-n 按照文件更改时间来查找文件, -n表示更改时间距现在n天以内, +n表示更改时间在n天以前</li>
+<li>-mmin n 最后n分钟更改的文件</li>
+<li>-empty 文件为空</li>
+<li>-a/-and 两个测试必须为真, -o/-or 其中一个为真, !/-not 取反
+  可通过括号增加测试优先级, 前面需加\</li>
+</ul>
+</li>
+<li>actions为执行语句<ul>
+<li>-exec -ok 必须以\;结尾。ok会在执行前询问,使用{}传入后会被当前文件的完整路径取代</li>
+<li>-print 打印文件名</li>
+</ul>
+</li>
+</ul>
+<h2 id="grep">grep<a class="headerlink" href="#grep" title="Permanent link">¶</a></h2>
+<p><code>grep [options] PATTERN [files]</code>用于在文件中搜索字符串</p>
+<ul>
+<li>options选项<ul>
+<li>-c 输出匹配行的数目，而不是输出匹配的行</li>
+<li>-E 启动拓展表达式</li>
+<li>-i 忽略大小写</li>
+<li>-l 只列出包含匹配行的文件名，而不输出真正的匹配行</li>
+<li>-v 对匹配模式取反，即搜索不匹配行而不是匹配行</li>
+<li>-n 打印包含匹配项的行和行标</li>
+</ul>
+</li>
+</ul>
+<h2 id="test">test<a class="headerlink" href="#test" title="Permanent link">¶</a></h2>
+<p><code>test expression or [ expression ]</code></p>
+<ul>
+<li>字符串<ul>
+<li>=/!= 是否相等</li>
+<li>-n/-z 是否为空</li>
+</ul>
+</li>
+<li>算术比较<ul>
+<li>-eq -ne -gt -ge -lt -le !</li>
+</ul>
+</li>
+<li>文件<ul>
+<li>-e 存在</li>
+<li>-f 存在并且是文件</li>
+<li>-d 存在并且是目录</li>
+<li>–w/v/x 可读/写/执行 </li>
+</ul>
+</li>
+</ul>
+<h2 id="cut">cut<a class="headerlink" href="#cut" title="Permanent link">¶</a></h2>
+<ul>
+<li>-f 按字段 </li>
+<li>-c 按字符 </li>
+<li>-b 按字节 </li>
+<li>-d 设置分割符 N-M, N设置输出范围</li>
+</ul>
+<h2 id="mkdir">mkdir<a class="headerlink" href="#mkdir" title="Permanent link">¶</a></h2>
+<ul>
+<li>-p 或 —parents 表示若所要创建的目录的上层目录没有创建，则会一并创建上层目录</li>
+</ul>
+<h2 id="comm">comm<a class="headerlink" href="#comm" title="Permanent link">¶</a></h2>
+<p>比较两个已排序的文件。在缺省情况下将三栏输出写到标准输出。这些栏由以下内容组成：只在 File1 中的行、只在 File2 中的行、既在 File1，又在 File2 中的行</p>
+<p><code>comm [-123] [File1] [File2]</code></p>
+<ul>
+<li>-1 不显示只在第1个文件里出现过的列</li>
+<li>-2 不显示只在第2个文件里出现过的列</li>
+<li>-3 不显示只在第1和第2个文件里出现过的列</li>
+</ul>
+<h2 id="expr">expr 或 $((…))<a class="headerlink" href="#expr" title="Permanent link">¶</a></h2>
+<p>将它的参数作为一个表达式来求值
+<code>x = `expr $x + 1`</code></p>
+<h2 id="9696">`…` 或 $(…)<a class="headerlink" href="#9696" title="Permanent link">¶</a></h2>
+<p>执行中间的语句, 结果就是命令的输出，而不是该命令的退出状态。将它的字符串形式的输出结果</p>
+<h2 id="_2">${…}<a class="headerlink" href="#_2" title="Permanent link">¶</a></h2>
+<ul>
+<li>为保护变量名中类似$i部分的扩展，需将其放入花括号中</li>
+<li>${param:-default} 当param为空时将它设置为default</li>
+<li>${#param} 给出param的长度</li>
+<li>${param%word} 从param尾部开始删除与word匹配的最小部分，返回剩余部分</li>
+<li>${param%%word} 从param尾部开始删除与word匹配的最长部分，返回剩余部分</li>
+<li>${param#word} 从param头部开始删除与word匹配的最小部分，返回剩余部分</li>
+<li>${param##word} 从param头部开始删除与word匹配的最长部分，返回剩余部分</li>
+</ul>
+<section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://klouse2014.github.io/shell+command#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'klouse2014';
+        var disqus_identifier = 'http://klouse2014.github.io/shell+command';
+    var disqus_url = 'http://klouse2014.github.io/shell+command';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+            <aside>
+            <hr/>
+            <nav>
+            <ul class="articles_timeline">
+ 
+                <li class="previous_article">« <a href="http://klouse2014.github.io/GitHub+Pelican" title="Previous: 使用GitHub＋Pelican搭建个人博客">使用GitHub＋Pelican搭建个人博客</a></li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+ 
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2015-04-27T21:09:00+08:00"> 4 27, 2015</time>
+            <h4>Category</h4>
+            <a class="category-link" href="/categories.html#Linux-ref">Linux</a> 
+
+            <!-- Begin MailChimp Signup Form -->
+            <div id="mc_embed_signup">
+                <form action="klouse@126.com" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                    <h4>Email Newsletter</h4>
+                    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+                    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+                </form>
+            </div>
+
+            <!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+<script type="text/javascript">
+    var disqus_shortname = 'klouse2014';
+
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+        <script  language="javascript" type="text/javascript">
+            function uncollapse() {
+                var hash_str = window.location.hash;
+                if (window.location.hash.match(/^#comment-\d+$/))
+                {
+                    var hash_str = '#disqus_thread';
+                }
+                $(hash_str).collapse({
+                    toggle: true
+                    })
+            }
+        </script>
+
+        <script type="text/javascript" language="JavaScript">
+            uncollapse(); 
+        </script>
+    </body>
+</html>
