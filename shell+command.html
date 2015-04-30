@@ -70,6 +70,9 @@
 <li><a href="#expr">expr 或 $((…))</a></li>
 <li><a href="#9696">`…` 或 $(…)</a></li>
 <li><a href="#_2">${…}</a></li>
+<li><a href="#forwhile">for或while</a></li>
+<li><a href="#here-document">Here Document</a></li>
+<li><a href="#tar">tar</a></li>
 </ul>
 </li>
 </ul>
@@ -149,7 +152,23 @@
 <h2 id="mkdir">mkdir<a class="headerlink" href="#mkdir" title="Permanent link">¶</a></h2>
 <ul>
 <li>-p 或 —parents 表示若所要创建的目录的上层目录没有创建，则会一并创建上层目录</li>
+<li>-m 指定目录的权限</li>
 </ul>
+<div class="highlight"><pre>mkdir -p project/{lib/ext,bin,src,doc/{html,info,pdf},demo/stat/a} 
+tree project/
+project/
+|-- bin
+|-- demo
+| `-- stat
+| `-- a
+|-- doc
+| |-- html
+| |-- info
+| `-- pdf
+|-- lib
+| `-- ext
+`-- src
+</pre></div>
 <h2 id="comm">comm<a class="headerlink" href="#comm" title="Permanent link">¶</a></h2>
 <p>比较两个已排序的文件。在缺省情况下将三栏输出写到标准输出。这些栏由以下内容组成：只在 File1 中的行、只在 File2 中的行、既在 File1，又在 File2 中的行</p>
 <p><code>comm [-123] [File1] [File2]</code></p>
@@ -173,6 +192,65 @@
 <li>${param#word} 从param头部开始删除与word匹配的最小部分，返回剩余部分</li>
 <li>${param##word} 从param头部开始删除与word匹配的最长部分，返回剩余部分</li>
 </ul>
+<h2 id="forwhile">for或while<a class="headerlink" href="#forwhile" title="Permanent link">¶</a></h2>
+<ul>
+<li>双括号形式，注意与算术计算$((…))区分</li>
+</ul>
+<div class="highlight"><pre>for((i=1;i&lt;100;i++;));do
+...
+done
+while((i&lt;100));do
+...
+done
+</pre></div>
+<ul>
+<li>for in 形式
+<code>for file in `ls *`</code> </li>
+<li>while 中括号形式 </li>
+</ul>
+<div class="highlight"><pre><span class="x">while [ </span><span class="p">$</span><span class="nv">i</span><span class="x"> -le </span><span class="p">$</span><span class="nv">max</span><span class="x"> ];do</span>
+<span class="x">...</span>
+<span class="x">done</span>
+</pre></div>
+<h2 id="here-document">Here Document<a class="headerlink" href="#here-document" title="Permanent link">¶</a></h2>
+<ul>
+<li>Here Document 是在Linux Shell 中的一种特殊的重定向方式，它的基本的形式如下</li>
+</ul>
+<div class="highlight"><pre>cmd &lt;&lt; delimiter
+  Here Document Content
+delimiter
+</pre></div>
+<p>这里要注意, delimiter 只是一个标识而已，可以替换成任意的合法字符</p>
+<ul>
+<li>在Here Document 的内容中，不仅可以包括普通的字符，还可以在里面使用变量，例如</li>
+</ul>
+<div class="highlight"><pre>cat &lt;&lt; EOF &gt; output.sh
+echo "This is output"
+echo $1
+EOF
+</pre></div>
+<p>使用sh here.sh HereDocument 运行脚本得到output.sh的内容</p>
+<div class="highlight"><pre>echo "This is output"
+echo HereDocument
+</pre></div>
+<p>在这里 $1 被展开成为了脚本的参数 HereDocument</p>
+<ul>
+<li>还有一个用法就是将 <code>&lt;&lt;</code>变为 <code>&lt;&lt;-</code>, 这样唯一变化就是Here Document 的内容部分每行前面的 tab (制表符)将会被删除掉，方便阅读代码</li>
+</ul>
+<h2 id="tar">tar<a class="headerlink" href="#tar" title="Permanent link">¶</a></h2>
+<p>可以归档多个文件和目录到一个.tar文件下，还可以从一个归档文件中抽取一个文件和目录。
+<code>tar [-c][-r][-t][-x][-v][-z][f 文件名] 文件和目录名</code></p>
+<ul>
+<li>-c 创建归档文件</li>
+<li>-r 增加文件到归档文件中</li>
+<li>-t 查看归档文件中的文件</li>
+<li>-x 解开归档文件</li>
+<li>-v 显示冗长信息</li>
+<li>-z 用gzip对存档压缩或解压</li>
+</ul>
+<div class="highlight"><pre>tar –czvf back.tar.gz 文件1 目录1 文件2
+tar –xzvf back.tar.gz
+</pre></div>
 <section>
 <p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
 <div class="accordion" id="accordion2">
