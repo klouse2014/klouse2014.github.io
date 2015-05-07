@@ -7,7 +7,7 @@
         <meta name="copyright" content="klouse1988" />
 
 <meta name="keywords" content="算法, 面试, 大数问题, 算法, " />
-        <title>面试题总结  · Winter Is Coming
+        <title>大数问题  · Winter Is Coming
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="http://klouse2014.github.io/theme/css/style.css" media="screen">
@@ -50,7 +50,7 @@
 <article>
 <div class="row-fluid">
     <header class="page_header span10 offset2">
-    <h1><a href="http://klouse2014.github.io/interview_bignum"> 面试题总结  </a></h1>
+    <h1><a href="http://klouse2014.github.io/interview_bignum"> 大数问题  </a></h1>
     </header>
 </div>
 
@@ -60,14 +60,9 @@
         <h4>Contents</h4>
         <div class="toc">
 <ul>
-<li><a href="#_1">大数问题</a><ul>
-<li><a href="#_2">把一个字符串转化为整数。</a><ul>
-<li><a href="#_3">大数加法</a></li>
-</ul>
-</li>
-<li><a href="#_4">带小数的大数加法</a></li>
-</ul>
-</li>
+<li><a href="#_1">把一个字符串转化为整数。</a></li>
+<li><a href="#_2">大数加法</a></li>
+<li><a href="#_3">带小数的大数加法</a></li>
 </ul>
 </div>
         </nav>
@@ -75,8 +70,7 @@
     <div class="span8 article-content">
 
             
-<h1 id="_1">大数问题<a class="headerlink" href="#_1" title="Permanent link">¶</a></h1>
-<h2 id="_2">把一个字符串转化为整数。<a class="headerlink" href="#_2" title="Permanent link">¶</a></h2>
+<h2 id="_1">把一个字符串转化为整数。<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
 <p>需要考虑以下几点：</p>
 <ul>
 <li>字符串开头：正负号需记下来, 开头连续为0的位应该跳过; 负号后紧跟0报错</li>
@@ -169,7 +163,7 @@
 </pre></div>
 </li>
 </ul>
-<h3 id="_3">大数加法<a class="headerlink" href="#_3" title="Permanent link">¶</a></h3>
+<h2 id="_2">大数加法<a class="headerlink" href="#_2" title="Permanent link">¶</a></h2>
 <blockquote>
 <p>I have a very simple problem for you. Given two integers A and B, your job is to calculate the Sum of A + B. A,B must be positive.</p>
 </blockquote>
@@ -232,7 +226,7 @@
         <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
     <span class="p">}</span>
 </pre></div>
-<h2 id="_4">带小数的大数加法<a class="headerlink" href="#_4" title="Permanent link">¶</a></h2>
+<h2 id="_3">带小数的大数加法<a class="headerlink" href="#_3" title="Permanent link">¶</a></h2>
 <blockquote>
 <p>输入包含两个正数A,B（可能为小数且位数不大于400）<br/> 输出A+B的结果，结果需要是最简的形式</p>
 </blockquote>
