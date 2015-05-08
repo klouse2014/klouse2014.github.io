@@ -60,7 +60,8 @@
         <h4>Contents</h4>
         <div class="toc">
 <ul>
-<li><a href="#_1">质数问题</a></li>
+<li><a href="#_1">单链表反转</a></li>
+<li><a href="#_2">质数问题</a></li>
 </ul>
 </div>
         </nav>
@@ -68,7 +69,41 @@
     <div class="span8 article-content">
 
             
-<h2 id="_1">质数问题<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
+<h2 id="_1">单链表反转<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
+<p>可以通过迭代和递归两种方法实现</p>
+<div class="highlight"><pre>struct ListNode {
+    int val;
+    struct ListNode *next;
+ };
+//迭代
+struct ListNode* reverseList(struct ListNode* head) 
+{
+    if(head == NULL)
+        return head;
+    struct ListNode *p = head;
+    struct ListNode *q = head-&gt;next;
+    head-&gt;next = NULL;
+    while(q != NULL)
+    {
+        struct ListNode *s = q-&gt;next;
+        q-&gt;next = p;
+        p = q;
+        q = s;
+    }
+    return p;
+}
+//递归
+struct ListNode* reverseList(struct ListNode* head) 
+{
+    if(head == NULL || head-&gt;next == NULL)
+        return head;
+    struct ListNode *q = reverseList(head-&gt;next);
+    head-&gt;next-&gt;next = head;
+    head-&gt;next = NULL;
+    return q;
+}
+</pre></div>
+<h2 id="_2">质数问题<a class="headerlink" href="#_2" title="Permanent link">¶</a></h2>
 <blockquote>
 <p>Count the number of prime numbers less than a non-negative number, n</p>
 </blockquote>
@@ -246,7 +281,7 @@
                     <span>1</span>
 </a></li>
                 <li><a href="/tags.html#面试-ref">面试
-                    <span>3</span>
+                    <span>2</span>
 </a></li>
                 <li><a href="/tags.html#算法-ref">算法
                     <span>2</span>
