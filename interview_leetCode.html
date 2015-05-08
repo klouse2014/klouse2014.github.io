@@ -62,6 +62,7 @@
 <ul>
 <li><a href="#_1">单链表反转</a></li>
 <li><a href="#_2">质数问题</a></li>
+<li><a href="#_3">根据给定有序数列生成平衡二叉树</a></li>
 </ul>
 </div>
         </nav>
@@ -224,6 +225,26 @@ struct ListNode* reverseList(struct ListNode* head)
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
+<h2 id="_3">根据给定有序数列生成平衡二叉树<a class="headerlink" href="#_3" title="Permanent link">¶</a></h2>
+<blockquote>
+<p>Given an array where elements are sorted in ascending order, convert it to a height balanced <span class="caps">BST</span>.</p>
+</blockquote>
+<ol>
+<li>通过递归实现, 当长度为0时返回<span class="caps">NULL</span> </li>
+<li>子函数返回子平衡二叉树  </li>
+<li>中值作为根节点连接前后两个子平衡树</li>
+</ol>
+<div class="highlight"><pre><span class="k">struct</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="nf">sortedArrayToBST</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">numsSize</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">numsSize</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">rootNum</span> <span class="o">=</span> <span class="n">numsSize</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">TreeNode</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">TreeNode</span><span class="p">));</span>
+    <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">rootNum</span><span class="p">];</span>
+    <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">sortedArrayToBST</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">rootNum</span><span class="p">);</span>
+    <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">sortedArrayToBST</span><span class="p">(</span><span class="n">nums</span><span class="o">+</span><span class="n">rootNum</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">numsSize</span><span class="o">-</span><span class="n">rootNum</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
 <section>
 <p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
 <div class="accordion" id="accordion2">
@@ -261,9 +282,7 @@ struct ListNode* reverseList(struct ListNode* head)
             <nav>
             <ul class="articles_timeline">
  
-                <li class="previous_article">« <a href="http://klouse2014.github.io/shell+command" title="Previous: shell命令备忘">shell命令备忘</a></li>
- 
-                <li class="next_article"><a href="http://klouse2014.github.io/interview_bignum" title="Next: 大数问题">大数问题</a> »</li>
+                <li class="previous_article">« <a href="http://klouse2014.github.io/interview_bignum" title="Previous: 大数问题">大数问题</a></li>
             </ul>
             </nav>
             </aside>
@@ -272,7 +291,7 @@ struct ListNode* reverseList(struct ListNode* head)
         <div class="span2" style="float:right;font-size:0.9em;">
  
             <h4>Published</h4>
-            <time pubdate="pubdate" datetime="2015-04-28T22:40:00+08:00"> 4 28, 2015</time>
+            <time pubdate="pubdate" datetime="2015-05-08T22:50:00+08:00"> 5 8, 2015</time>
             <h4>Category</h4>
             <a class="category-link" href="/categories.html#算法-ref">算法</a> 
             <h4>Tags</h4>
