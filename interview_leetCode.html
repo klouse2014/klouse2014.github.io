@@ -62,7 +62,12 @@
 <ul>
 <li><a href="#_1">单链表反转</a></li>
 <li><a href="#_2">质数问题</a></li>
-<li><a href="#_3">根据给定有序数列生成平衡二叉树</a></li>
+<li><a href="#_3">根据给定有序数组生成平衡二叉树</a></li>
+<li><a href="#_4">给定数组，查找数组中是否存在一对相加和为给定数的数对</a></li>
+<li><a href="#_5">链表数字相加</a></li>
+<li><a href="#_6">结尾单词长度</a></li>
+<li><a href="#_7">查找相交链表第一个交点</a></li>
+<li><a href="#_8">同型字符串</a></li>
 </ul>
 </div>
         </nav>
@@ -71,43 +76,42 @@
 
             
 <h2 id="_1">单链表反转<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
+<p><a href="https://leetcode.com/problems/reverse-linked-list/">Reverse Linked List</a></p>
 <p>可以通过迭代和递归两种方法实现</p>
-<div class="highlight"><pre>struct ListNode {
-    int val;
-    struct ListNode *next;
- };
-//迭代
-struct ListNode* reverseList(struct ListNode* head) 
-{
-    if(head == NULL)
-        return head;
-    struct ListNode *p = head;
-    struct ListNode *q = head-&gt;next;
-    head-&gt;next = NULL;
-    while(q != NULL)
-    {
-        struct ListNode *s = q-&gt;next;
-        q-&gt;next = p;
-        p = q;
-        q = s;
-    }
-    return p;
-}
-//递归
-struct ListNode* reverseList(struct ListNode* head) 
-{
-    if(head == NULL || head-&gt;next == NULL)
-        return head;
-    struct ListNode *q = reverseList(head-&gt;next);
-    head-&gt;next-&gt;next = head;
-    head-&gt;next = NULL;
-    return q;
-}
+<div class="highlight"><pre><span class="k">struct</span> <span class="n">ListNode</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">ListNode</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="c1">//迭代</span>
+<span class="k">struct</span> <span class="n">ListNode</span><span class="o">*</span> <span class="nf">reverseList</span><span class="p">(</span><span class="k">struct</span> <span class="n">ListNode</span><span class="o">*</span> <span class="n">head</span><span class="p">)</span> 
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">head</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">head</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">ListNode</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">ListNode</span> <span class="o">*</span><span class="n">q</span> <span class="o">=</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+    <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">q</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">struct</span> <span class="n">ListNode</span> <span class="o">*</span><span class="n">s</span> <span class="o">=</span> <span class="n">q</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+        <span class="n">q</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">q</span><span class="p">;</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">p</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//递归</span>
+<span class="k">struct</span> <span class="n">ListNode</span><span class="o">*</span> <span class="nf">reverseList</span><span class="p">(</span><span class="k">struct</span> <span class="n">ListNode</span><span class="o">*</span> <span class="n">head</span><span class="p">)</span> 
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">head</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="o">||</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">head</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">ListNode</span> <span class="o">*</span><span class="n">q</span> <span class="o">=</span> <span class="n">reverseList</span><span class="p">(</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">);</span>
+    <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
+    <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">q</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 <h2 id="_2">质数问题<a class="headerlink" href="#_2" title="Permanent link">¶</a></h2>
-<blockquote>
-<p>Count the number of prime numbers less than a non-negative number, n</p>
-</blockquote>
+<p><a href="https://leetcode.com/problems/count-primes/">Count Primes</a></p>
 <p>在生成质数序列时, 可以如下考虑：  </p>
 <ol>
 <li>在判断一个数是否是质数时, 会看是否能被比他小的其他整数整除  </li>
@@ -225,10 +229,8 @@ struct ListNode* reverseList(struct ListNode* head)
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
-<h2 id="_3">根据给定有序数列生成平衡二叉树<a class="headerlink" href="#_3" title="Permanent link">¶</a></h2>
-<blockquote>
-<p>Given an array where elements are sorted in ascending order, convert it to a height balanced <span class="caps">BST</span>.</p>
-</blockquote>
+<h2 id="_3">根据给定有序数组生成平衡二叉树<a class="headerlink" href="#_3" title="Permanent link">¶</a></h2>
+<p><a href="https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/">Convert Sorted Array to Binary Search Tree</a></p>
 <ol>
 <li>通过递归实现, 当长度为0时返回<span class="caps">NULL</span> </li>
 <li>子函数返回子平衡二叉树  </li>
@@ -243,6 +245,233 @@ struct ListNode* reverseList(struct ListNode* head)
     <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">sortedArrayToBST</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">rootNum</span><span class="p">);</span>
     <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">sortedArrayToBST</span><span class="p">(</span><span class="n">nums</span><span class="o">+</span><span class="n">rootNum</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">numsSize</span><span class="o">-</span><span class="n">rootNum</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
     <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+<h2 id="_4">给定数组，查找数组中是否存在一对相加和为给定数的数对<a class="headerlink" href="#_4" title="Permanent link">¶</a></h2>
+<p><a href="https://leetcode.com/problems/two-sum/">Two Sum</a></p>
+<ol>
+<li>考虑到如果存在相同的数字，如果使用hash字典纪录索引信息会造成相同键值覆盖的问题。因此通过定义一个结构体来记录数值＋索引</li>
+<li>按结构体中的数值排序后，按照排序后数组查找指定和的数值对的方法查找。空间复杂度为O(n), 时间复杂度为O(lgn)  </li>
+</ol>
+<div class="highlight"><pre><span class="cp">#include "stdio.h"</span>
+<span class="cp">#include "string.h"</span>
+
+<span class="k">struct</span> <span class="n">elem</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">value</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">index</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">cmp</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">vp1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">vp2</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="k">struct</span> <span class="n">elem</span><span class="o">*</span><span class="p">)</span><span class="n">vp1</span><span class="p">).</span><span class="n">value</span> <span class="o">-</span> <span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="k">struct</span> <span class="n">elem</span><span class="o">*</span><span class="p">)</span><span class="n">vp2</span><span class="p">).</span><span class="n">value</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="o">*</span> <span class="nf">twoSum</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">numsSize</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">elem</span> <span class="o">*</span><span class="n">list</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">elem</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">numsSize</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">elem</span><span class="p">));</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="sc">'\0'</span><span class="p">,</span> <span class="n">numsSize</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">elem</span><span class="p">));</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">numsSize</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">value</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">index</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">qsort</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="n">numsSize</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">elem</span><span class="p">),</span> <span class="n">cmp</span><span class="p">);</span>
+
+    <span class="k">struct</span> <span class="n">elem</span> <span class="o">*</span><span class="n">first</span> <span class="o">=</span> <span class="n">list</span><span class="p">,</span> <span class="o">*</span><span class="n">last</span> <span class="o">=</span> <span class="n">list</span><span class="o">+</span><span class="n">numsSize</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">first</span> <span class="o">&lt;</span> <span class="n">last</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">first</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">+</span> <span class="n">last</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">&gt;</span> <span class="n">target</span><span class="p">)</span>
+            <span class="o">--</span><span class="n">last</span><span class="p">;</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">first</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">+</span> <span class="n">last</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">)</span>
+            <span class="o">++</span><span class="n">first</span><span class="p">;</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">first</span><span class="o">-&gt;</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">last</span><span class="o">-&gt;</span><span class="n">index</span> <span class="o">?</span> <span class="n">first</span><span class="o">-&gt;</span><span class="nl">index</span><span class="p">:</span><span class="n">last</span><span class="o">-&gt;</span><span class="n">index</span> <span class="p">;</span>
+            <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">first</span><span class="o">-&gt;</span><span class="n">index</span> <span class="o">&gt;</span> <span class="n">last</span><span class="o">-&gt;</span><span class="n">index</span> <span class="o">?</span> <span class="n">first</span><span class="o">-&gt;</span><span class="nl">index</span><span class="p">:</span><span class="n">last</span><span class="o">-&gt;</span><span class="n">index</span> <span class="p">;</span>
+            <span class="n">free</span><span class="p">(</span><span class="n">list</span><span class="p">);</span>
+            <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">free</span><span class="p">(</span><span class="n">list</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+<h2 id="_5">链表数字相加<a class="headerlink" href="#_5" title="Permanent link">¶</a></h2>
+<p><a href="https://leetcode.com/problems/add-two-numbers/">Add Two Numbers</a></p>
+<ol>
+<li>由于链表是从低位向高位，因此做法类似大数加法</li>
+<li>主要处理好边界和异常检查</li>
+</ol>
+<div class="highlight"><pre><span class="cp">#include "iostream"</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="k">struct</span> <span class="n">ListNode</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+    <span class="n">ListNode</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">ListNode</span><span class="o">*</span> <span class="nf">addTwoNumbers</span><span class="p">(</span><span class="k">struct</span> <span class="n">ListNode</span><span class="o">*</span> <span class="n">l1</span><span class="p">,</span> <span class="k">struct</span> <span class="n">ListNode</span><span class="o">*</span> <span class="n">l2</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">l1</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="o">||</span> <span class="n">l2</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">pre</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">ListNode</span> <span class="o">*</span><span class="n">root</span> <span class="o">=</span> <span class="p">(</span><span class="n">ListNode</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">ListNode</span><span class="p">));</span>
+    <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">=</span> <span class="p">(</span><span class="n">l1</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">+</span> <span class="n">l2</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="n">root</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">pre</span> <span class="o">=</span> <span class="p">(</span><span class="n">l1</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">+</span> <span class="n">l2</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10</span><span class="p">;</span>
+
+    <span class="n">l1</span> <span class="o">=</span> <span class="n">l1</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+    <span class="n">l2</span> <span class="o">=</span> <span class="n">l2</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+    <span class="n">ListNode</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="n">root</span><span class="p">,</span> <span class="o">*</span><span class="n">q</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+
+    <span class="k">while</span><span class="p">(</span><span class="n">l1</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span> <span class="n">l2</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="p">(</span><span class="n">ListNode</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">ListNode</span><span class="p">));</span>
+        <span class="n">q</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">=</span> <span class="p">(</span><span class="n">l1</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">+</span> <span class="n">l2</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">+</span> <span class="n">pre</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span><span class="p">;</span>
+        <span class="n">q</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+        <span class="n">pre</span> <span class="o">=</span> <span class="p">(</span><span class="n">l1</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">+</span> <span class="n">l2</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">+</span> <span class="n">pre</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10</span><span class="p">;</span>
+
+        <span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">q</span><span class="p">;</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">q</span><span class="p">;</span>
+        <span class="n">l1</span> <span class="o">=</span> <span class="n">l1</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+        <span class="n">l2</span> <span class="o">=</span> <span class="n">l2</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">l1</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="p">(</span><span class="n">ListNode</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">ListNode</span><span class="p">));</span>
+        <span class="n">q</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">=</span> <span class="p">(</span><span class="n">l1</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">+</span> <span class="n">pre</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span><span class="p">;</span>
+        <span class="n">q</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+        <span class="n">pre</span> <span class="o">=</span> <span class="p">(</span><span class="n">l1</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">+</span> <span class="n">pre</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10</span><span class="p">;</span>
+
+        <span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">q</span><span class="p">;</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">q</span><span class="p">;</span>
+        <span class="n">l1</span> <span class="o">=</span> <span class="n">l1</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">l2</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="p">(</span><span class="n">ListNode</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">ListNode</span><span class="p">));</span>
+        <span class="n">q</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">=</span> <span class="p">(</span><span class="n">l2</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">+</span> <span class="n">pre</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span><span class="p">;</span>
+        <span class="n">q</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+        <span class="n">pre</span> <span class="o">=</span> <span class="p">(</span><span class="n">l2</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">+</span> <span class="n">pre</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10</span><span class="p">;</span>
+
+        <span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">q</span><span class="p">;</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">q</span><span class="p">;</span>
+        <span class="n">l2</span> <span class="o">=</span> <span class="n">l2</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">pre</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="p">(</span><span class="n">ListNode</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">ListNode</span><span class="p">));</span>
+        <span class="n">q</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">=</span> <span class="n">pre</span> <span class="o">%</span> <span class="mi">10</span><span class="p">;</span>
+        <span class="n">q</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+
+        <span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">q</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+<span class="p">}</span>  
+</pre></div>
+<h2 id="_6">结尾单词长度<a class="headerlink" href="#_6" title="Permanent link">¶</a></h2>
+<p><a href="https://leetcode.com/problems/length-of-last-word/">Length of Last Word</a></p>
+<p>需要注意当空格结尾时, 应跳过空格查找最后一个单词的长度</p>
+<div class="highlight"><pre><span class="kt">int</span> <span class="nf">lengthOfLastWord</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">s</span><span class="p">)</span> 
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nb">NULL</span> <span class="o">==</span> <span class="n">s</span> <span class="o">||</span> <span class="mi">0</span> <span class="o">==</span> <span class="n">strlen</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">strlen</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="o">*</span><span class="n">p</span> <span class="o">==</span> <span class="sc">' '</span> <span class="o">&amp;&amp;</span> <span class="n">p</span> <span class="o">&gt;=</span> <span class="n">s</span><span class="p">)</span>
+        <span class="o">--</span><span class="n">p</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">lastLen</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">p</span> <span class="o">&gt;=</span> <span class="n">s</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">*</span><span class="n">p</span> <span class="o">==</span> <span class="sc">' '</span><span class="p">)</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="o">--</span><span class="n">p</span><span class="p">;</span>
+        <span class="o">++</span><span class="n">lastLen</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">lastLen</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+<h2 id="_7">查找相交链表第一个交点<a class="headerlink" href="#_7" title="Permanent link">¶</a></h2>
+<p><a href="https://leetcode.com/problems/intersection-of-two-linked-lists/">Intersection of Two Linked Lists</a> </p>
+<ol>
+<li>得到两条链表长度</li>
+<li>如果相交的话, 从两条链表距离结尾相同位置的节点开始向后查找时。一定会遇到指向相同节点的时刻, 即为第一个交点</li>
+</ol>
+<div class="highlight"><pre><span class="k">struct</span> <span class="n">ListNode</span> <span class="o">*</span><span class="nf">getIntersectionNode</span><span class="p">(</span><span class="k">struct</span> <span class="n">ListNode</span> <span class="o">*</span><span class="n">headA</span><span class="p">,</span> <span class="k">struct</span> <span class="n">ListNode</span> <span class="o">*</span><span class="n">headB</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nb">NULL</span> <span class="o">==</span> <span class="n">headA</span> <span class="o">||</span> <span class="nb">NULL</span> <span class="o">==</span> <span class="n">headB</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">ListNode</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="n">headA</span><span class="p">,</span> <span class="o">*</span><span class="n">q</span> <span class="o">=</span> <span class="n">headB</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">p</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">q</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">q</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="n">j</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">headA</span> <span class="o">=</span> <span class="n">headA</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+        <span class="n">i</span><span class="o">--</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="n">i</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">headB</span> <span class="o">=</span> <span class="n">headB</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+        <span class="n">j</span><span class="o">--</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">while</span><span class="p">(</span><span class="n">headA</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">headA</span> <span class="o">==</span> <span class="n">headB</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">headA</span><span class="p">;</span>
+        <span class="n">headA</span> <span class="o">=</span> <span class="n">headA</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+        <span class="n">headB</span> <span class="o">=</span> <span class="n">headB</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+<h2 id="_8">同型字符串<a class="headerlink" href="#_8" title="Permanent link">¶</a></h2>
+<p><a href="https://leetcode.com/problems/isomorphic-strings/">Isomorphic Strings</a></p>
+<ol>
+<li>可以将字符串按照每个字符第一次出现的索引进行重新编码 <code>egg -&gt; 011 paper -&gt; 01034</code></li>
+<li>这样同型字符串会被转化成相同的编码, 比较编码是否相等即可</li>
+</ol>
+<div class="highlight"><pre><span class="cp">#include "iostream"</span>
+<span class="cp">#include "string"</span>
+<span class="cp">#include "vector"</span>
+<span class="cp">#include "map"</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">bool</span> <span class="nf">isIsomorphic</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="n">string</span> <span class="n">t</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">checkList</span><span class="p">;</span>
+    <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">firstPosDict</span><span class="p">;</span>
+    <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;::</span><span class="n">iterator</span> <span class="n">iter</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">string</span><span class="o">::</span><span class="n">size_type</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">iter</span> <span class="o">=</span> <span class="n">firstPosDict</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">iter</span> <span class="o">==</span> <span class="n">firstPosDict</span><span class="p">.</span><span class="n">end</span><span class="p">())</span>
+            <span class="n">firstPosDict</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="n">checkList</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">firstPosDict</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]]);</span>
+    <span class="p">}</span>
+    <span class="n">firstPosDict</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="n">string</span><span class="o">::</span><span class="n">size_type</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">t</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">iter</span> <span class="o">=</span> <span class="n">firstPosDict</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">iter</span> <span class="o">==</span> <span class="n">firstPosDict</span><span class="p">.</span><span class="n">end</span><span class="p">())</span>
+            <span class="n">firstPosDict</span><span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">checkList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">firstPosDict</span><span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+            <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 <section>
