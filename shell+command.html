@@ -73,6 +73,8 @@
 <li><a href="#forwhile">for或while</a></li>
 <li><a href="#here-document">Here Document</a></li>
 <li><a href="#tar">tar</a></li>
+<li><a href="#sort">sort</a></li>
+<li><a href="#uniq">uniq</a></li>
 </ul>
 </li>
 </ul>
@@ -251,6 +253,34 @@ echo HereDocument
 <div class="highlight"><pre>tar –czvf back.tar.gz 文件1 目录1 文件2
 tar –xzvf back.tar.gz
 </pre></div>
+<h2 id="sort">sort<a class="headerlink" href="#sort" title="Permanent link">¶</a></h2>
+<p>对文件进行排序。<br/>
+<code>sort [OPTION]... [FILE]...</code></p>
+<ul>
+<li>-u 在输出中去除重复的行</li>
+<li>-r sort默认是升序排列, -r为降序排列</li>
+<li>-o 重定向到文件, 可以使用原文件</li>
+<li>-n 以数值进行排序</li>
+<li>-t -k -t用于设置分隔符, -k用来指定排序的列数</li>
+</ul>
+<div class="highlight"><pre><span class="nv">$ </span>sort -n -t <span class="s1">' '</span> -k 3r -k <span class="m">2</span> facebook.txt
+baidu <span class="m">100</span> 5000
+google <span class="m">110</span> 5000
+sohu <span class="m">100</span> 4500
+guge <span class="m">50</span> 3000
+</pre></div>
+<h2 id="uniq">uniq<a class="headerlink" href="#uniq" title="Permanent link">¶</a></h2>
+<p>检查重复的行
+<code>uniq [-c | -d | -u] [-i] [-f num] [-s chars] [input_file [output_file]]</code> </p>
+<ul>
+<li>-c, —count 在每行前显示该行重复次数</li>
+<li>-d, —repeated 只输出重复的行</li>
+<li>-D, —all-repeated 只输出重复的行，不过有几行输出几行</li>
+<li>-f, —skip-fields=N -f 忽略的段数，-f 1 忽略第一段</li>
+<li>-i, —ignore-case 不区分大小写</li>
+<li>-s, —skip-chars=N 根-f有点像，不过-s是忽略，后面多少个字符 -s 5就忽略后面5个字符</li>
+<li>-u, —unique 去除重复的后，全部显示出来，根mysql的distinct功能上有点像</li>
+</ul>
 <section>
 <p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
 <div class="accordion" id="accordion2">
