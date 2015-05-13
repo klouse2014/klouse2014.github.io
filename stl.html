@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="klouse1988" />
+        <meta name="copyright" content="klouse1988" />
+
+<meta name="keywords" content="stl, stl, " />
+        <title>stl学习  · Winter Is Coming
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://klouse2014.github.io/theme/css/style.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://klouse2014.github.io/theme/css/solarizedlight.css" media="screen">
+        <link rel="shortcut icon" href="http://klouse2014.github.io/theme/images/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="http://klouse2014.github.io/theme/images/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://klouse2014.github.io/theme/images/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://klouse2014.github.io/theme/images/apple-touch-icon-72x72.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://klouse2014.github.io/theme/images/apple-touch-icon-114x114.png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://klouse2014.github.io/theme/images/apple-touch-icon-144x144.png" />
+        <link rel="icon" href="http://klouse2014.github.io/theme/images/apple-touch-icon-144x144.png" />
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://klouse2014.github.io/"><span class=site-name>Winter Is Coming</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://klouse2014.github.io">Home</a></li>
+                            <li ><a href="http://klouse2014.github.io/categories.html">Categories</a></li>
+                            <li ><a href="http://klouse2014.github.io/tags.html">Tags</a></li>
+                            <li ><a href="http://klouse2014.github.io/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://klouse2014.github.io/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page_header span10 offset2">
+    <h1><a href="http://klouse2014.github.io/stl"> stl学习  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contents</h4>
+        <div class="toc">
+<ul>
+<li><a href="#stl">stl学习笔记</a><ul>
+<li><a href="#_1">顺序容器</a><ul>
+<li><a href="#_2">容器的构造函数</a></li>
+<li><a href="#_3">容器内元素的类型约束</a></li>
+<li><a href="#_4">迭代器</a></li>
+<li><a href="#_5">顺序容器的类型定义与操作</a></li>
+<li><a href="#_6">容器选用</a></li>
+<li><a href="#string">string类型</a></li>
+<li><a href="#_7">容器适配器</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+
+            
+<h1 id="stl">stl学习笔记<a class="headerlink" href="#stl" title="Permanent link">¶</a></h1>
+<p>参照《Primer C++》系统的学习一遍stl, 把重要的知识点记录下来</p>
+<h2 id="_1">顺序容器<a class="headerlink" href="#_1" title="Permanent link">¶</a></h2>
+<p>标准库定义了三种顺序容器：vector、list、deque(双端队列), 他们的差别在于访问元素的方式以及添加或删除元素的相关操作的代价;还提供了三种容器适配器: stack、queue、priority_queue.</p>
+<h3 id="_2">容器的构造函数<a class="headerlink" href="#_2" title="Permanent link">¶</a></h3>
+<ul>
+<li><code>C&lt;T&gt; c;</code> 创建一个空容器, 适用所有容器</li>
+<li><code>C&lt;T&gt; c(c2);</code> 创建容器c2的副本, 适用所有容器</li>
+<li><code>C&lt;T&gt; c(b,e);</code> 创建c, 其元素是迭代器b和e标示范围内元素的副本, 适用所有容器</li>
+<li><code>C&lt;T&gt; c(n,t);</code> 用n个值为t的元素创建容器, 其中t必须是容器C的元素类型的值或者可转换为该类型, 仅适用顺序容器</li>
+<li><code>C&lt;T&gt; c(n);</code> 创建有n个值初始化元素的容器c, 仅适用顺序容器</li>
+</ul>
+<p>注意：<br/>
+1. 将一个容器复制给另一个容器时, 类型必须匹配：容器类型和元素类型都必须相同<br/>
+2. 使用迭代器时, 不要求容器类型相同, 元素类型相互兼容即可实现复制. 迭代器需要标记出要复制的第一个元素和最后一个元素<br/>
+3. 由于指针就是迭代器, 因此允许指针实现容器初始化. 第二个指向的是停止复制的条件, 其所指向位置的元素未被复制
+4. 只提供元素个数时, 元素必须为内置或复合类型, 或者提供了默认构造函数的类型</p>
+<div class="highlight"><pre><span class="kt">char</span> <span class="o">*</span><span class="n">words</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="err">'</span><span class="mi">111</span><span class="sc">','</span><span class="mi">222</span><span class="sc">','</span><span class="mi">333</span><span class="err">'</span><span class="p">};</span>
+<span class="n">list</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">words2</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">words</span><span class="o">+</span><span class="mi">3</span><span class="p">);</span>
+</pre></div>
+<h3 id="_3">容器内元素的类型约束<a class="headerlink" href="#_3" title="Permanent link">¶</a></h3>
+<ul>
+<li>元素类型必须支持赋值运算</li>
+<li>元素类型对象必须可以复制</li>
+<li>因为容易受容器元素类型的约束, 因此可以定义元素是容器类型的容器. 注意中间需加空格</li>
+</ul>
+<h3 id="_4">迭代器<a class="headerlink" href="#_4" title="Permanent link">¶</a></h3>
+<p><strong>常用运算：</strong><br/>
+<em> <code>*iter</code> 返回迭代器指向元素的引用
+</em> <code>iter-&gt;mem</code> 对iter解引用, 获得指定元素的mem成员.  等效于<code>(*iter).mem</code>
+<em> <code>++iter iter++</code> 使iter指向下一个元素
+</em> <code>--iter iter--</code> 使iter指向前一个元素
+* <code>iter1==iter2 iter1!=iter2</code> 比较两个迭代器是否相等. 当指向同一个容器同一个元素或者同一个容器超出末端的下一个元素时相等</p>
+<p><strong>vector和deque迭代器额外运算：</strong><br/>
+<em> <code>iter+n iter-n</code> 在迭代器上加(减)整数值n, 产生指向容器中前面(后面)第n个元素的迭代器. 新计算出来的迭代器必须指向容器中的元素或超出容器末尾的下一个位置
+</em> <code>iter1 - iter2</code> 计算结果为加上右边的迭代器等于左边的迭代器
+* <code>&gt; &gt;= &lt; &lt;=</code> 返回迭代器相对位置<br/>
+这是由于只有vector和deque容器为其元素提供了快速、随机的访问, 确保可根据元素位置直接有效地访问指定的容器元素, 使得他们的迭代器可以有效的实现算术和关系运算</p>
+<p><strong>使迭代器失效的容器操作：</strong><br/>
+一些容器操作修改容器内在状态或移动容器内的元素, 会导致指向被移动的元素的迭代器失效, 也可能同时使其他迭代器失效. 使用无效的迭代器可能导致与使用空指针相同的问题  </p>
+<h3 id="_5">顺序容器的类型定义与操作<a class="headerlink" href="#_5" title="Permanent link">¶</a></h3>
+<p><strong>类型别名:</strong>
+<em> size_type 无符号整型, 足以存储此容器类型最大可能容器长度
+</em> iterator 此容器类型的迭代器类型
+<em> const_iterator 元素的只读迭代器类型
+</em> reverse_iterator 按逆序寻址元素的迭代器
+<em> const_reverse_iterator 元素的只读逆序迭代器
+</em> difference_type 足够存储两个迭代器差值的有符号整型
+<em> value_tpye 元素类型
+</em> reference 元素的左值类型, 是<code>value_type&amp;</code>的同义词
+* const_reference 元素的常量左值类型, 等效于<code>const value_type&amp;</code> </p>
+<p><strong>begin和end成员：</strong><br/>
+begin和end操作产生指向容器内第一个元素和最后一个元素的下一个位置的迭代器
+<em> <code>c.begin()</code> 返回一个迭代器, 指向c的第一个元素
+</em> <code>c.end()</code> 返回一个迭代器, 指向c的最后一个元素的下一个位置
+<em> <code>c.rbegin()</code> 返回一个逆序迭代器, 指向容易c的最后一个元素
+</em> <code>c.rend()</code> 返回一个逆序迭代器, 指向容器c的第一个元素前面的位置<br/>
+每个操作均有两个版本, 如果容器是const, 则其返回类型要加上<code>const_</code>前缀</p>
+<p><strong>添加元素的操作：</strong><br/>
+容器元素都是副本, 系统是将元素值复制到容器中. 被复制的原始值与新容器中的元素各不相关<br/>
+<em> <code>c.push_back(t)</code> 在容器c的尾部添加值为t的元素, 返回void
+</em> <code>c.push_front(t)</code> 在容器c的前端添加值为t的元素, 只适用于list和deque容器类型, 返回void
+<em> <code>c.insert(p,t)</code> 在迭代器p所指向的元素前面插入值为t的新元素, 返回</em>指向新添加元素的迭代器<em>
+</em> <code>c.insert(p,n,t)</code> 在迭代器p所指向的元素前面插入n个值为t的新元素, 返回void
+* <code>c.insert(p,b,e)</code> 在迭代器p所指向的元素前面插入由迭代器b和e标识范围内的元素, 返回void  </p>
+<ol>
+<li>任何insert或push操作都可能导致迭代器失效, 当编写循环将元素插入到vector或deque容器中时, 程序必须确保迭代器在每次循环后都得到更新  </li>
+<li>避免存储end操作返回的迭代器, 添加或删除deque或vector容器内的元素都会导致存储的迭代器失效. 可以在每次完成插入运算后重新计算end迭代器  </li>
+</ol>
+<p><strong>顺序容器的大小操作：</strong><br/>
+<em> <code>c.size()</code> 返回容器c中的元素个数. 返回类型为c::size_type
+</em> <code>c.max_size()</code> 返回容器c可容纳的的最多元素个数. 返回类型为c::size_type
+<em> <code>c.empty()</code> 返回容器大小是否为0
+</em> <code>c.resize(n)</code> 调整容器c的长度大小, 使其能容纳n个元素. 如果<code>n&lt;c.size()</code>, 删除多余的元素; 否则添加初始化的新元素
+* <code>c.resize(n,t)</code> 调整容器c的长度大小, 使其能容纳n个元素. 所有新增加的元素值都为t<br/>
+1. resize操作会是vector和deque的所有迭代器失效
+2. 对于所有的容器类型, 如果resize操作压缩了容器, 则指向已删除的元素迭代器失效</p>
+<p><strong>访问元素：</strong><br/>
+<em> <code>c.back()</code> 返回容器c的最后一个元素的引用, 为空则此操作未定义
+</em> <code>c.front()</code> 返回容器c的第一个元素的引用, 为空则此操作未定义
+<em> <code>c[n]</code> 返回下标为n的元素的引用, 只适合vector和deque, 下标越界则未定义
+</em> <code>c.at(n)</code> 类似<code>c[n]</code>, 但n越界会跑出out_of_range异常</p>
+<div class="highlight"><pre><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">ilist</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
+    <span class="n">list</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;::</span><span class="n">reference</span> <span class="n">val</span> <span class="o">=</span> <span class="o">*</span><span class="n">ilist</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+    <span class="n">list</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;::</span><span class="n">reference</span> <span class="n">val2</span> <span class="o">=</span> <span class="n">ilist</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+
+    <span class="n">list</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;::</span><span class="n">reference</span> <span class="n">last</span> <span class="o">=</span> <span class="o">*--</span><span class="n">ilist</span><span class="p">.</span><span class="n">end</span><span class="p">();</span>
+    <span class="n">list</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;::</span><span class="n">reference</span> <span class="n">last2</span> <span class="o">=</span> <span class="n">ilist</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+<p><strong>删除元素：</strong>
+<em> <code>c.erase(p)</code> 删除迭代器p指向的元素, 返回一个迭代器指向被删除元素后面的元素. 如果p指向最后一个元素, 则返回超出容器末端的下一个位置
+</em> <code>c.erase(b,e)</code> 删除迭代器b和e所标记的范围内所有的元素, 返回一个迭代器指向被删除元素后面的元素
+<em> <code>c.clear()</code> 删除容器c内的所有元素, 返回void
+</em> <code>c.pop_back()</code> 删除容器c的最后一个元素, 返回void
+* <code>c.pop_front()</code> 删除容器c的第一个元素, 返回void. 只适用于list或deque容器</p>
+<ol>
+<li>pop_front和pop_back返回的不是删除元素的值, 而是void</li>
+<li>erase, pop_front, pop_back函数会使指向被删除元素的所有迭代器失效. vector容器会使其后的元素迭代器失效, deque如果删除不包含第一个或最后一个元素则所有迭代器都会失效  </li>
+</ol>
+<div class="highlight"><pre><span class="n">string</span> <span class="nf">searchValue</span><span class="p">(</span><span class="s">"abc"</span><span class="p">)</span>
+<span class="n">list</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;::</span><span class="n">iterator</span> <span class="n">iter</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">slist</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">slist</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">searchValue</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="n">iter</span> <span class="o">!=</span> <span class="n">slist</span><span class="p">.</span><span class="n">end</span><span class="p">())</span>
+    <span class="n">slist</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">iter</span><span class="p">);</span>
+</pre></div>
+<p><strong>赋值与swap：</strong>
+<em> <code>c1 = c2</code> 删除容器c1的所有元素, 然后将c2的元素复制给c1. c1和c2的类型(容器和元素类型)必须相同
+</em> <code>c1.swap(c2)</code> c1与c2交换内容
+<em> <code>c.assign(b,e)</code> 重新设置c的元素, 将迭代器b,e标识范围内的元素复制到c中
+</em> <code>c.assign(n,t)</code> 将容器c重新存储为n个值为t的元素</p>
+<ol>
+<li>与赋值相关的操作符作用于整个容器, 除了swap操作外其他操作都可以用erase和insert操作实现</li>
+<li>赋值要求容器和元素类型必须一致, 但assign可以对不同容器、不同但相互兼容的元素类型操作</li>
+<li>swap要交换的容器类型和元素类型必须一致. 由于swap操作不会删除或插入任何元素, 容器内没有移动任何元素, 因此迭代器不会失效. 如果一个迭代器iter指向svec1[3], swap运算后该迭代器指向svec2[3]</li>
+</ol>
+<div class="highlight"><pre><span class="n">slist1</span> <span class="o">=</span> <span class="n">slist2</span><span class="p">;</span>
+<span class="n">slist1</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">slist2</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">slist2</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+<span class="n">slist1</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s">"abc!"</span><span class="p">);</span>
+</pre></div>
+<p><strong>capacity和reserve：</strong>
+<em> <code>capacity()</code>操作获取在容器需要分配更多存储空间之前能够存储的元素总数
+</em> <code>reserve()</code>操作告诉vector容器应该预留多少个元素的存储空间
+* <code>size()</code>操作指容器当前拥有的元素个数</p>
+<h3 id="_6">容器选用<a class="headerlink" href="#_6" title="Permanent link">¶</a></h3>
+<ul>
+<li>如果程序要求随机访问元素, 则应使用vector或deque容器</li>
+<li>如果程序必须在容器的中间位置插入或删除元素, 则应采用list容器</li>
+<li>如果程序不是在中间位置而是容器首部或尾部插入或删除元素, 则采用deque容器</li>
+<li>如果读取输入时在容器中间位置插入元素, 然后需要随机访问. 可以先读入到list容器, 在复制到vector容器中</li>
+</ul>
+<h3 id="string">string类型<a class="headerlink" href="#string" title="Permanent link">¶</a></h3>
+<p>pass  </p>
+<h3 id="_7">容器适配器<a class="headerlink" href="#_7" title="Permanent link">¶</a></h3>
+<p>除了顺序容器, 标准库还提供了三种顺序容器适配器: queue, priority_queue, stack<br/>
+<strong>适配器</strong>包含容器适配器、迭代器适配器和函数适配器. 本质上, 适配器是使一事物的行为类似于另一事物的行为的一种机制. 容器适配器让一种已存在的容器类型采用另一种不同的抽象类型的工作方式实现. 例如stack适配器可使任何一种顺序容器以栈的方式工作  </p>
+<p><strong>通用的操作和类型</strong><br/>
+<em> size_type 一种类型, 足以存储此适配器类型最大对象的长度
+</em> value_tpye 元素类型
+<em> container_type 基础容器的类型, 适配器在此容器类型上实现
+</em> <code>A a</code> 创建一个新空适配器
+<em> <code>A a(c)</code> 创建一个新适配器, 初始化为容器c的副本
+</em> 关系操作符 适配器都支持<code>== != &lt; &lt;= &gt; &gt;=</code> </p>
+<p><strong>覆盖基础容器类型</strong><br/>
+1. 默认的stack和queue都是基于deque容器实现的, 而priority_queue则是在vector容器上实现的<br/>
+2. 在创建适配器时, 通过将一个顺序容器指定为适配器的第二个类型实参, 可覆盖其关联的基础容器类型<br/>
+3. 对于给定适配器, 其关联容器必须满足一定的约束条件. <em>stack</em>关联的基础容器可以是任意一种顺序容器类型, 因此可以建立在vector, list或deque上; <em>queue</em>要求基础容器必须提供push_front运算, 因此不能建立在vector上; <em>priority_queue</em>要求提供随机访问能力, 因此可以建立在vector和deque上, 不能建立在list上  </p>
+<div class="highlight"><pre><span class="n">stack</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">str_stk</span><span class="p">;</span>
+<span class="n">stack</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">str_stk</span><span class="p">(</span><span class="n">svec</span><span class="p">);</span>
+</pre></div>
+<p><strong>栈适配器</strong><br/>
+<em> <code>s.empty()</code> 如果栈为空, 返回true否则false
+</em> <code>s.size()</code> 返回栈中元素的个数
+<em> <code>s.push(item)</code> 在栈顶压入新元素
+</em> <code>s.pop()</code> 删除栈顶元素的值, 但不返回其值
+* <code>s.top()</code> 返回栈顶元素的值, 但不删除该元素</p>
+<p><strong>队列和优先级队列</strong><br/>
+必须包含”queue”头文件. queue为先入先出队列, priority_queue允许用户为队列中存储的元素设置优先级, 将元素放在比他优先级低的元素前面<br/>
+<em> <code>q.empty()</code> 如果队列为空, 返回true否则false<br/>
+</em> <code>q.size()</code> 返回队列中元素的个数
+<em> <code>q.push(item)</code> 对于queue在队尾压入一个新元素, 在优先级队列基于优先级的适当位置插入新元素
+</em> <code>q.pop()</code> 删除首元素, 但不返回值
+<em> <code>q.front()</code> 返回队首元素的值, 但不删除. 只适用于队列
+</em> <code>q.back()</code> 返回队尾元素的值, 但不删除. 只适用于队列
+* <code>q.top()</code> 返回具有最高优先级的元素, 但不删除. 只适用于优先级队列  </p>
+<section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://klouse2014.github.io/stl#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'klouse2014';
+        var disqus_identifier = 'http://klouse2014.github.io/stl';
+    var disqus_url = 'http://klouse2014.github.io/stl';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+            <aside>
+            <hr/>
+            <nav>
+            <ul class="articles_timeline">
+ 
+                <li class="previous_article">« <a href="http://klouse2014.github.io/health" title="Previous: 瘦身计划">瘦身计划</a></li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+ 
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2015-05-13T23:10:00+08:00"> 5 13, 2015</time>
+            <h4>Category</h4>
+            <a class="category-link" href="/categories.html#stl-ref">stl</a> 
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article"> 
+                <li><a href="/tags.html#stl-ref">stl
+                    <span>1</span>
+</a></li>
+            </ul>
+
+            <!-- Begin MailChimp Signup Form -->
+            <div id="mc_embed_signup">
+                <form action="klouse@126.com" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                    <h4>Email Newsletter</h4>
+                    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+                    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+                </form>
+            </div>
+
+            <!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+<script type="text/javascript">
+    var disqus_shortname = 'klouse2014';
+
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+        <script  language="javascript" type="text/javascript">
+            function uncollapse() {
+                var hash_str = window.location.hash;
+                if (window.location.hash.match(/^#comment-\d+$/))
+                {
+                    var hash_str = '#disqus_thread';
+                }
+                $(hash_str).collapse({
+                    toggle: true
+                    })
+            }
+        </script>
+
+        <script type="text/javascript" language="JavaScript">
+            uncollapse(); 
+        </script>
+    </body>
+</html>
